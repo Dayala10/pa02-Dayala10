@@ -1,16 +1,21 @@
 #include "movies.h"
+#include <algorithm>
 using namespace std;
 
 //Comparison helpers and printing 
 //helps check if the movie starts with prefix
 bool Movie::hasPrefix(const string& prefix) const{
-    bool isTrue = false;
-    if(prefix.size() > title.size()){
+    if (prefix.size() > title.size()){
         return false;
-    }
+    } 
 
-    isTrue = title.compare(0,prefix.size(), prefix) == 0;
-    return isTrue;
+    string s = title.substr(0,prefix.size());
+
+    transform(s.begin(), s.end(), s.begin(), ::tolower); //lowercasing 
+    string p = prefix;
+    transform(p.begin(), p.end(), p.begin(), ::tolower);
+
+    return s == p;
 } 
 
 
